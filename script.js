@@ -98,7 +98,7 @@ template.innerHTML = '<div class="inner" id="inner">' +
   '</div>';
 
 // Register and return the constructor
-module.exports = document.registerElement('gaia-textinput', { prototype: proto });
+module.exports = document.registerElement('gaia-text-input', { prototype: proto });
 
 });})((function(n,w){return typeof define=='function'&&define.amd?
 define:typeof module=='object'?function(c){c(require,exports,module);}:function(c){
