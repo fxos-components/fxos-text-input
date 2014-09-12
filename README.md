@@ -8,4 +8,4 @@ $ bower install gaia-components/gaia-text-input
 
 ## Examples
 
-- [Example](http://gaia-components.github.io/gaia-text-input/examples/)
+- [Example](http://gaia-components.github.io/gaia-text-input/)
