@@ -1,84 +1,82 @@
 (function(define){define(function(require,exports,module){
+/*jshint esnext:true*/
 'use strict';
-
-/**
- * Dependencies
- */
-
-var utils = require('gaia-component-utils');
 
 /**
  * Locals
  */
 
-var packagesBaseUrl = window.packagesBaseUrl || '/bower_components/';
-var baseUrl = window.GaiaTextInputBaseUrl || packagesBaseUrl + 'gaia-text-input/';
+var baseComponents = window.COMPONENTS_BASE_URL || 'bower_components/';
+var base = window.GAIA_TEXT_INPUT_BASE_URL || baseComponents + 'gaia-text-input/';
 
-var stylesheets = [
-  { url: packagesBaseUrl + '/gaia-icons/style.css' },
-  { url: baseUrl + 'style.css', scoped: true }
-];
+// Load gaia-icons
+require('gaia-icons')(baseComponents);
 
-// Extend from the HTMLElement prototype
+/**
+ * Extend from the `HTMLElement` prototype
+ *
+ * @type {Object}
+ */
 var proto = Object.create(HTMLElement.prototype);
 
 proto.createdCallback = function() {
   var shadow = this.createShadowRoot();
-  this._template = template.content.cloneNode(true);
-  this._inner = this._template.getElementById('inner');
-  this._input = this._template.getElementById('input');
+  var tmpl = template.content.cloneNode(true);
+
+  this.els = {
+    inner: tmpl.querySelector('.inner'),
+    input: tmpl.querySelector('.input'),
+    clear: tmpl.querySelector('.clear')
+  };
 
   this.placeholder = this.getAttribute('placeholder');
-  this.resettable = this.getAttribute('resettable');
   this.required = this.getAttribute('required');
   this.value = this.getAttribute('value');
   this.type = this.getAttribute('type');
 
   // Don't take focus from the input field
-  var reset = this._template.getElementById('reset');
-  reset.addEventListener('mousedown', function(e) { e.preventDefault(); });
-  reset.addEventListener('click', this.reset.bind(this));
+  this.els.clear.addEventListener('mousedown', function(e) { e.preventDefault(); });
+  this.els.clear.addEventListener('click', this.clear.bind(this));
 
-  shadow.appendChild(this._template);
-  utils.style.call(this, stylesheets);
+  shadow.appendChild(tmpl);
+  this.styleHack();
+};
+
+proto.styleHack = function() {
+  var style = this.shadowRoot.querySelector('style');
+  style.setAttribute('scoped', '');
+  this.appendChild(style.cloneNode(true));
 };
 
 
 Object.defineProperties(proto, {
   type: {
-    get: function() { return this._input.type; },
+    get: function() { return this.els.input.type; },
     set: function(value) {
       if (!value) { return; }
-      this._input.type = value;
+      this.els.inner.setAttribute('type', value);
+      this.els.input.type = value;
     }
   },
   placeholder: {
-    get: function() { return this._input.placeholder; },
+    get: function() { return this.els.input.placeholder; },
     set: function(value) {
       if (!value) { return; }
-      this._input.placeholder = value; }
+      this.els.input.placeholder = value;
+    }
   },
   value: {
-    get: function() { return this._input.value; },
-    set: function(value) { this._input.value = value; }
+    get: function() { return this.els.input.value; },
+    set: function(value) { this.els.input.value = value; }
   },
   required: {
-    get: function() { return this._input.required; },
-    set: function(value) { this._input.required = value; }
-  },
-  resettable: {
-    get: function() { return this._resettable; },
-    set: function(value) {
-      var resettable = value || value === '';
-      if (resettable) { this._inner.setAttribute('resettable', ''); }
-      else { this._inner.removeAttribute('resettable'); }
-      this._resettable = resettable;
-    }
+    get: function() { return this.els.input.required; },
+    set: function(value) { this.els.input.required = value; }
   }
 });
 
-proto.reset = function(e) {
-  this._input.value = '';
+proto.clear = function(e) {
+  this.els.input.value = '';
 };
 
 // HACK: Create a <template> in memory at runtime.
@@ -92,10 +90,180 @@ proto.reset = function(e) {
 // hack until we can import entire custom-elements
 // using HTML Imports (bug 877072).
 var template = document.createElement('template');
-template.innerHTML = '<div class="inner" id="inner">' +
-    '<input id="input" type="text">' +
-    '<button class="reset icon icon-close" id="reset"></button>' +
-  '</div>';
+
+template.innerHTML = `
+<style>
+
+/** Reset
+ ---------------------------------------------------------*/
+
+input, button {
+  box-sizing: border-box;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+gaia-text-input {
+  display: block;
+}
+
+:host() {
+  display: block;
+}
+
+/** Label
+ ---------------------------------------------------------*/
+
+label {
+  font-size: 14px;
+  display: block;
+  margin: 0 0 4px 16px;
+}
+
+/** Inner
+ ---------------------------------------------------------*/
+
+.input-container {
+  --gi-border-color:
+    var(--input-border-color,
+    var(--border-color,
+    var(--background-plus,
+    #e7e7e7)));
+
+  position: relative;
+  border-color: --gi-border-color;
+  border:
+    var(--input-border,
+    var(--border,
+    1px solid var(--gi-border-color)));
+}
+
+/**
+ * [type="search"]
+ */
+
+[type='search'] .input-container {
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+/** Input Field
+ ---------------------------------------------------------*/
+
+.input {
+  display: block;
+  width: 100%;
+  height: 40px;
+  font-size: inherit;
+  width: 100%;
+  border: none;
+  padding: 0 16px;
+  margin: 0;
+  font: inherit;
+  color: var(--input-color, #000);
+  background:
+    var(--input-background,
+    var(--background-minus,
+    #fff));
+}
+
+/** Placeholder Text
+ ---------------------------------------------------------*/
+
+.input::-moz-placeholder {
+  font-style: italic;
+  color: var(--input-placeholder-color, #909ca7);
+}
+
+/** Clear Button
+ ---------------------------------------------------------*/
+
+.clear {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  background: var(--input-clear-background, #999);
+  width: 17px;
+  height: 17px;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
+  opacity: 0;
+  color: #fff;
+}
+
+/**
+ * input:focus
+ */
+
+.input:focus ~ .clear {
+  opacity: 1;
+}
+
+/** Clear Icon
+ ---------------------------------------------------------*/
+
+.clear:before {
+  font-family: 'gaia-icons';
+  content: 'close';
+  display: block;
+  font-style: normal;
+  font-weight: 500;
+  text-rendering: optimizeLegibility;
+  font-size: 19px;
+  line-height: 1;
+  margin-top: -2px;
+}
+
+/** Focus Bar
+ ---------------------------------------------------------*/
+
+.focus {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 3px;
+  transition: all 200ms;
+  transform: scaleX(0);
+  visibility: hidden;
+  background: var(--highlight-color, #000);
+}
+
+/**
+ * input:focus
+ */
+
+.input:focus ~ .focus {
+  transform: scaleX(1);
+  transition-delay: var(--button-transition-delay, 200ms);
+  visibility: visible;
+}
+
+/* search */
+// .input-search-container {
+//   border-radius: 30px;
+//   overflow: hidden;
+// }
+
+// .input-search {
+//   border-radius: 20px;
+// }
+
+// .input-passcode {
+//   width: 40px;
+// }
+
+</style>
+
+<div class="inner">
+  <content select="label"></content>
+  <div class="input-container">
+    <input class="input" type="text"/>
+    <button class="clear"></button>
+    <div class="focus"></div>
+  </div>
+</div>`;
 
 // Register and return the constructor
 module.exports = document.registerElement('gaia-text-input', { prototype: proto });
