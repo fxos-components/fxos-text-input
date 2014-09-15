@@ -132,7 +132,7 @@ label {
     #e7e7e7)));
 
   position: relative;
-  border-color: --gi-border-color;
+  border-color: var(--gi-border-color);
   border:
     var(--input-border,
     var(--border,
@@ -162,10 +162,12 @@ label {
   margin: 0;
   font: inherit;
   color: var(--input-color, #000);
+
   background:
+    var(--text-input-background,
     var(--input-background,
     var(--background-minus,
-    #fff));
+    #fff)));
 }
 
 /** Placeholder Text
@@ -239,20 +241,6 @@ label {
   transition-delay: var(--button-transition-delay, 200ms);
   visibility: visible;
 }
-
-/* search */
-// .input-search-container {
-//   border-radius: 30px;
-//   overflow: hidden;
-// }
-
-// .input-search {
-//   border-radius: 20px;
-// }
-
-// .input-passcode {
-//   width: 40px;
-// }
 
 </style>
 
