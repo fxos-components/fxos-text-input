@@ -10,7 +10,7 @@ var baseComponents = window.COMPONENTS_BASE_URL || 'bower_components/';
 var base = window.GAIA_TEXT_INPUT_BASE_URL || baseComponents + 'gaia-text-input/';
 
 // Load gaia-icons
-require('gaia-icons')(baseComponents);
+require('gaia-icons');
 
 /**
  * Extend from the `HTMLElement` prototype
@@ -30,6 +30,7 @@ proto.createdCallback = function() {
   };
 
   this.placeholder = this.getAttribute('placeholder');
+  this.disabled = this.hasAttribute('disabled');
   this.required = this.getAttribute('required');
   this.value = this.getAttribute('value');
   this.type = this.getAttribute('type');
@@ -58,6 +59,7 @@ Object.defineProperties(proto, {
       this.els.input.type = value;
     }
   },
+
   placeholder: {
     get: function() { return this.els.input.placeholder; },
     set: function(value) {
@@ -65,13 +67,20 @@ Object.defineProperties(proto, {
       this.els.input.placeholder = value;
     }
   },
+
   value: {
     get: function() { return this.els.input.value; },
     set: function(value) { this.els.input.value = value; }
   },
+
   required: {
     get: function() { return this.els.input.required; },
     set: function(value) { this.els.input.required = value; }
+  },
+
+  disabled: {
+    get: function() { return this.els.input.disabled; },
+    set: function(value) { this.els.input.disabled = value; }
   }
 });
 
@@ -168,6 +177,14 @@ label {
     var(--input-background,
     var(--background-minus,
     #fff)));
+}
+
+/**
+ * [disabled]
+ */
+
+.input[disabled] {
+  opacity: 0.6;
 }
 
 /** Placeholder Text
