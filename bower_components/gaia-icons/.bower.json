@@ -4,23 +4,30 @@
   "authors": [
     "Wilson Page <wilsonpage@me.com>"
   ],
-  "main": "style.css",
+  "main": "gaia-icons.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
+    "!.jshintrc",
     "node_modules",
     "bower_components",
+    "templates",
+    "images",
     "test",
-    "tests"
+    "tests",
+    "index.html",
+    "create-svg-icon-set-file.py",
+    "Gruntfile.js",
+    "README.md",
+    "package.json"
   ],
-  "_release": "ab21733283",
+  "_release": "4b4997acdd",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "ab21733283954aea083cbad9290f3bd4e6bdd0fb"
+    "commit": "4b4997acdd63ba4893ca8520460e052a6644b7fa"
   },
   "_source": "git://github.com/gaia-components/gaia-icons.git",
-  "_target": "*",
-  "_originalSource": "gaia-components/gaia-icons",
-  "_direct": true
+  "_target": "master",
+  "_originalSource": "gaia-components/gaia-icons"
 }
