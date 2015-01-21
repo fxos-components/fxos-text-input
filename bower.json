@@ -15,9 +15,13 @@
     "README.md"
   ],
   "dependencies": {
-    "gaia-icons": "gaia-components/gaia-icons"
+    "gaia-icons": "gaia-components/gaia-icons#~0.6.0",
+    "gaia-component": "gaia-components/gaia-component#~0.2.0"
   },
   "devDependencies": {
-    "gaia-fonts": "gaia-components/gaia-fonts#~0.2.1"
+    "gaia-fonts": "gaia-components/gaia-fonts#~0.2.1",
+    "gaia-theme": "gaia-components/gaia-theme#~0.4.3",
+    "base": "gaia-components/base",
+    "gaia-icons": "gaia-components/gaia-icons#master"
   }
 }
