@@ -14,6 +14,7 @@ require('gaia-icons'); // Load gaia-icons
  */
 
 module.exports = component.register('gaia-text-input', {
+  extends: HTMLInputElement,
 
   created: function() {
     this.setupShadowRoot();
