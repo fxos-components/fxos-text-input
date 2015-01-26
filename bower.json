@@ -4,7 +4,7 @@
   "authors": [
     "Wilson Page <wilsonpage@me.com>"
   ],
-  "main": "script.js",
+  "main": "gaia-text-input.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "gaia-icons": "gaia-components/gaia-icons#~0.6.0",
-    "gaia-component": "gaia-components/gaia-component#~0.2.0"
+    "gaia-component": "gaia-components/gaia-component#~0.3.0"
   },
   "devDependencies": {
     "gaia-fonts": "gaia-components/gaia-fonts#~0.2.1",
