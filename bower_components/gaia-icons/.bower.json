@@ -21,11 +21,11 @@
     "README.md",
     "package.json"
   ],
-  "_release": "4b4997acdd",
+  "_release": "5285be734c",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "4b4997acdd63ba4893ca8520460e052a6644b7fa"
+    "commit": "5285be734c3c00bfb84b54e62cb953adb55b9cbc"
   },
   "_source": "git://github.com/gaia-components/gaia-icons.git",
   "_target": "master",
