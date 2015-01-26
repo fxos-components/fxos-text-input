@@ -4,7 +4,7 @@
   "authors": [
     "Wilson Page <wilsonpage@me.com>"
   ],
-  "main": "script.js",
+  "main": "gaia-text-input.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
