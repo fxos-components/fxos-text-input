@@ -82,7 +82,8 @@ module.exports = component.register('gaia-text-input-multiline', {
 
     :host {
       display: block;
-      margin: var(--base-m, 18px);
+      margin-top: var(--base-m, 18px);
+      margin-bottom: var(--base-m, 18px);
     }
 
     /** Inner
@@ -113,6 +114,7 @@ module.exports = component.register('gaia-text-input-multiline', {
      ---------------------------------------------------------*/
 
     .fields {
+      box-sizing: border-box;
       position: relative;
       width: 100%;
       height: 100%;

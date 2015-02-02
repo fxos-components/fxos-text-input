@@ -125,7 +125,8 @@ module.exports = component.register('gaia-text-input-pin', {
     :host {
       display: block;
       height: 40px;
-      margin: var(--base-m, 18px);
+      margin-top: var(--base-m, 18px);
+      margin-bottom: var(--base-m, 18px);
       font-size: 40px;
     }
 
