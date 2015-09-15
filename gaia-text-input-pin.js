@@ -31,13 +31,7 @@ module.exports = component.register('gaia-text-input-pin', {
     this.disabled = this.hasAttribute('disabled');
     this.length = this.getAttribute('length') || DEFAULT_LENGTH;
 
-    this.addEventListener('focus', () => this.onFocus());
     this.addEventListener('keyup', () => this.updateCells());
-  },
-
-  onFocus: function() {
-    this.els.input.focus();
-    this.updateCells();
   },
 
   updateCells: function() {
@@ -113,8 +107,10 @@ module.exports = component.register('gaia-text-input-pin', {
   template: `
     <div class="inner">
       <content select="label"></content>
-      <input tabindex="-1"/>
-      <div class="fields" tabindex="0"></div>
+      <div class="container">
+        <input />
+        <div class="fields"></div>
+      </div>
     </div>
 
     <style>
@@ -125,7 +121,8 @@ module.exports = component.register('gaia-text-input-pin', {
     :host {
       display: block;
       height: 40px;
-      margin: var(--base-m, 18px);
+      margin-top: var(--base-m, 18px);
+      margin-bottom: var(--base-m, 18px);
       font-size: 40px;
     }
 
@@ -145,12 +142,28 @@ module.exports = component.register('gaia-text-input-pin', {
       margin: 0 0 4px 16px;
     }
 
+    /** Container
+     ---------------------------------------------------------*/
+
+    .container {
+      position: relative;
+      z-index: 0;
+      height: 100%;
+    }
+
     /** Input (hidden)
      ---------------------------------------------------------*/
 
     input {
       opacity: 0;
+      display: block;
       position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      z-index: 1;
     }
 
     /** Fields
