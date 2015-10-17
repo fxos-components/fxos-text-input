@@ -15,8 +15,9 @@ module.exports = function(config) {
 
     files: [
       'test/setup.js',
+      'bower_components/gaia-component/gaia-component.js',
       'gaia-text-input.js',
-      'test/gaia-text-input.js'
+      'test/gaia-input.js'
     ]
   });
 };
