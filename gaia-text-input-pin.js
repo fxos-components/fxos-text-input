@@ -255,6 +255,7 @@ module.exports = component.register('gaia-text-input-pin', {
     .cell::before {
       content: '';
       position: absolute;
+      left: 0;
       bottom: 0;
       width: 100%;
       height: 3px;

@@ -14,9 +14,6 @@ require('gaia-icons'); // Load gaia-icons
  */
 
 module.exports = component.register('gaia-text-input', {
-  extends: HTMLInputElement,
-  rtl: true,
-
   created: function() {
     this.setupShadowRoot();
 
@@ -135,6 +132,20 @@ module.exports = component.register('gaia-text-input', {
       height: 40px;
       margin-top: var(--base-m, 18px);
       margin-bottom: var(--base-m, 18px);
+      font-size: 17px;
+      overflow: hidden;
+
+      --this-background:
+        var(--text-input-background,
+        var(--input-background,
+        var(--background-minus,
+        #fff)));
+
+      --this-border-color:
+        var(--input-border-color,
+        var(--border-color,
+        var(--background-plus,
+        #e7e7e7)));
     }
 
     /** Reset
@@ -179,20 +190,15 @@ module.exports = component.register('gaia-text-input', {
       position: relative;
       width: 100%;
       height: 100%;
-
-      --gi-border-color:
-        var(--input-border-color,
-        var(--border-color,
-        var(--background-plus,
-        #e7e7e7)));
+      box-sizing: border-box;
 
       border-color:
-        var(--gi-border-color);
+        var(--this-border-color);
 
       border:
         var(--input-border,
         var(--border,
-        1px solid var(--gi-border-color)));
+        1px solid var(--this-border-color)));
     }
 
     /**
@@ -222,11 +228,7 @@ module.exports = component.register('gaia-text-input', {
       color:
         var(--text-color, #000);
 
-      background:
-        var(--text-input-background,
-        var(--input-background,
-        var(--background-minus,
-        #fff)));
+      background: var(--this-background);
     }
 
     /**
@@ -234,7 +236,7 @@ module.exports = component.register('gaia-text-input', {
      */
 
     input[disabled] {
-      background: transparent;
+      background: var(--background);
     }
 
     /** Placeholder Text
@@ -254,27 +256,18 @@ module.exports = component.register('gaia-text-input', {
       display: none;
       position: absolute;
       top: 11px;
-      right: 0;
+      offset-inline-end: 0;
       width: 18px;
       height: 18px;
       padding: 0;
       margin: 0 10px;
       border-radius: 50%;
       opacity: 0;
-      color: #fff;
+      color: var(--background);
       cursor: pointer;
 
       background:
         var(--input-clear-background, #999);
-    }
-
-    /**
-     * [dir=rtl]
-     */
-
-    [dir=rtl] .clear {
-      right: initial;
-      left: 0;
     }
 
     /**
@@ -308,13 +301,20 @@ module.exports = component.register('gaia-text-input', {
 
     .focus {
       position: absolute;
+      left: 0;
       bottom: 0px;
       width: 100%;
       height: 3px;
-      transition: all 200ms;
+      transition: transform 200ms;
       transform: scaleX(0);
       visibility: hidden;
       background: var(--highlight-color, #000);
+    }
+
+    [type='search'] .focus {
+      border-radius: 0 0 60px 60px;
+      left: 10px;
+      width: calc(100% - 20px);
     }
 
     /**
@@ -326,6 +326,7 @@ module.exports = component.register('gaia-text-input', {
       transition-delay: 200ms;
       visibility: visible;
     }
+
     </style>
   `
 });
