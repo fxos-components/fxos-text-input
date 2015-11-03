@@ -1,0 +1,25 @@
+language: node_js
+
+node_js:
+  - '5.0'
+
+addons:
+  firefox: '40.0.2'
+
+install:
+  - npm install
+
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
+script:
+  - $CI_ACTION
+
+env:
+  global:
+    - TEST_SUITE=unit
+
+  matrix:
+    - CI_ACTION="npm run test-lint"
+    - CI_ACTION="npm run test-unit"
