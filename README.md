@@ -1,4 +1,4 @@
-# &lt;gaia-text-input&gt;
+# &lt;gaia-text-input&gt; [![](https://travis-ci.org/gaia-components/gaia-text-input.svg)](https://travis-ci.org/gaia-components/gaia-text-input)
 
 ## Installation
 
