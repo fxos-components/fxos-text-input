@@ -21,7 +21,8 @@
     "test": "npm run --silent test-unit && npm run --silent test-lint",
     "test-lint": "./node_modules/jshint/bin/jshint *.js",
     "test-unit": "./node_modules/karma/bin/karma start test/karma.conf.js --single-run",
-    "test-unit-dev": "./node_modules/karma/bin/karma start test/karma.conf.js"
+    "test-unit-dev": "./node_modules/karma/bin/karma start test/karma.conf.js",
+    "gh-pages": "git co gh-pages; git merge master; git push upstrea gh-pages; git co -"
   },
   "repository": {
     "type": "git",
