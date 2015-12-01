@@ -1,7 +1,7 @@
 {
   "name": "gaia-text-input",
   "version": "0.2.2",
-  "homepage": "https://github.com/gaia-components/gaia-text-input",
+  "homepage": "https://github.com/fxos-components/gaia-text-input",
   "license": "ISC",
   "main": "gaia-text-input.js",
   "directories": {
@@ -26,9 +26,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/gaia-components/gaia-text-input.git"
+    "url": "git://github.com/fxos-components/gaia-text-input.git"
   },
   "bugs": {
-    "url": "https://github.com/gaia-components/gaia-text-input/issues"
+    "url": "https://github.com/fxos-components/gaia-text-input/issues"
   }
 }
