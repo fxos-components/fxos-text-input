@@ -71,6 +71,10 @@ module.exports = component.register('gaia-text-input-pin', {
     this.updateCells();
   },
 
+  focus(e) {
+    this.els.input.focus();
+  },
+
   /**
    * Attributes
    */
