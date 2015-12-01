@@ -68,6 +68,7 @@ module.exports = component.register('gaia-text-input-pin', {
 
   clear(e) {
     this.value = '';
+    this.updateCells();
   },
 
   /**
@@ -103,7 +104,7 @@ module.exports = component.register('gaia-text-input-pin', {
     <div class="inner">
       <content select="label"></content>
       <div class="container">
-        <input />
+        <input x-inputmode="digit"/>
         <div class="fields"></div>
       </div>
     </div>
