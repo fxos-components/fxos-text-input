@@ -1,6 +1,6 @@
 {
   "name": "gaia-text-input",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "homepage": "https://github.com/fxos-components/gaia-text-input",
   "license": "ISC",
   "main": "gaia-text-input.js",
