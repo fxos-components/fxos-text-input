@@ -1,10 +1,10 @@
 {
-  "name": "gaia-text-input",
+  "name": "fxos-text-input",
   "authors": [
     "Wilson Page <wilsonpage@me.com>"
   ],
 
-  "main": "gaia-text-input.js",
+  "main": "fxos-text-input.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -14,17 +14,12 @@
     "tests",
     "index.html",
     "manifest.webapp",
+    "webpack.config.js",
     "README.md"
   ],
 
   "dependencies": {
-    "gaia-icons": "fxos-components/gaia-icons#~1.0.0",
-    "gaia-component": "fxos-components/gaia-component#~0.6.0"
-  },
-
-  "devDependencies": {
-    "gaia-fonts": "fxos-components/gaia-fonts",
-    "gaia-theme": "fxos-components/gaia-theme",
-    "base": "fxos-components/base"
+    "fxos-icons": "fxos-components/fxos-icons#~2.0.0",
+    "fxos-component": "fxos-components/fxos-component#~1.0.0"
   }
 }

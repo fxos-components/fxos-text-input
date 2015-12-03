@@ -1,25 +1,25 @@
-(define=>{define((require,exports,module)=>{
-'use strict';
 
 /**
  * Dependencies
  */
 
-var component = require('gaia-component');
-require('gaia-icons'); // Load gaia-icons
+var component = require('fxos-component');
+require('fxos-icons');
 
 /**
  * Mini logger
  *
  * @type {Function}
  */
-var debug = 0 ? (...args) => console.log('[GaiaTextInput]', ...args) : () => {};
+var debug = 0
+  ? (...args) => console.log('[fxos-text-input]', ...args)
+  : () => {};
 
 /**
  * Exports
  */
 
-module.exports = component.register('gaia-text-input', {
+module.exports = component.register('fxos-text-input', {
   created() {
     this.setupShadowRoot();
 
@@ -182,8 +182,8 @@ module.exports = component.register('gaia-text-input', {
     },
 
     value: {
-      get: function() { return this.els.input.value; },
-      set: function(value) {
+      get() { return this.els.input.value; },
+      set(value) {
         debug('set value', value);
         this.els.input.value = value;
         this.onValueChanged();
@@ -191,18 +191,18 @@ module.exports = component.register('gaia-text-input', {
     },
 
     required: {
-      get: function() { return this.els.input.required; },
-      set: function(value) { this.els.input.required = value; }
+      get() { return this.els.input.required; },
+      set(value) { this.els.input.required = value; }
     },
 
     maxlength: {
-      get: function() { return this.els.input.getAttribute('maxlength'); },
-      set: function(value) { this.els.input.setAttribute('maxlength', value); }
+      get() { return this.els.input.getAttribute('maxlength'); },
+      set(value) { this.els.input.setAttribute('maxlength', value); }
     },
 
     disabled: {
-      get: function() { return this.els.input.disabled; },
-      set: function(value) {
+      get() { return this.els.input.disabled; },
+      set(value) {
         value = !!(value === '' || value);
         this.els.input.disabled = value;
       }
@@ -222,27 +222,18 @@ module.exports = component.register('gaia-text-input', {
       :host {
         display: block;
         height: 40px;
-        margin-top: var(--base-m, 18px);
-        margin-bottom: var(--base-m, 18px);
-        font-size: 17px;
+        margin-top: 18px;
+        margin-bottom: 18px;
         overflow: hidden;
 
-        --this-background:
-          var(--text-input-background,
-          var(--input-background,
-          var(--background-minus,
-          #fff)));
-
-        --this-border-color:
-          var(--input-border-color,
-          var(--border-color,
-          var(--background-plus,
-          #e7e7e7)));
+        font-size: 17px;
+        font-weight: 300;
+        color:
+          var(--fxos-text-input-color,
+          var(--fxos-color));
       }
 
-      .inner {
-        height: 100%;
-      }
+      .inner { height: 100% }
 
       label {
         font-size: 14px;
@@ -250,23 +241,16 @@ module.exports = component.register('gaia-text-input', {
         margin: 0 0 4px 16px;
       }
 
-      [disabled] label {
-        opacity: 0.3;
-      }
+      [disabled] label { opacity: 0.3 }
 
       .fields {
         position: relative;
         width: 100%;
         height: 100%;
         box-sizing: border-box;
-
-        border-color:
-          var(--this-border-color);
-
-        border:
-          var(--input-border,
-          var(--border,
-          1px solid var(--this-border-color)));
+        border: solid 1px
+          var(--fxos-text-input-border-color,
+          var(--fxos-border-color, #999));
       }
 
       [type='search'] .fields {
@@ -284,23 +268,19 @@ module.exports = component.register('gaia-text-input', {
         border: 0;
 
         font: inherit;
-        resize: none;
-
-        /* Dynamic */
-
-        color: var(--text-color, #000);
-        background: var(--this-background);
+        color: inherit;
+        background:
+          var(--fxos-text-input-background,
+          var(--fxos-background, #fff));
       }
 
       input[disabled] {
-        background: var(--background);
+        background: var(--fxos-text-input-background-disabled);
       }
 
       ::-moz-placeholder {
         font-style: italic;
-
-        color:
-          var(--input-placeholder-color, #909ca7);
+        color: var(--fxos-text-input-placeholder-color, inherit);
       }
 
       .clear {
@@ -317,17 +297,16 @@ module.exports = component.register('gaia-text-input', {
         box-sizing: content-box;
 
         border-radius: 50%;
-        color: var(--background);
-        cursor: pointer;
-        background: var(--input-clear-background, #999);
         background-clip: padding-box;
-        opacity: 0;
         pointer-events: none;
+        cursor: pointer;
+        opacity: 0;
+
+        color: var(--fxos-text-input-clear-color, #fff);
+        background-color: var(--fxos-text-input-clear-background, #999);
       }
 
-      [clearable] .clear {
-        display: block;
-      }
+      [clearable] .clear { display: block }
 
       [clearable].has-value.focused .clear {
         pointer-events: all;
@@ -339,7 +318,7 @@ module.exports = component.register('gaia-text-input', {
         content: 'close';
         display: block;
 
-        font: normal 500 19px/17px 'gaia-icons';
+        font: normal 500 19px/16.5px 'fxos-icons';
         text-rendering: optimizeLegibility;
       }
 
@@ -354,7 +333,9 @@ module.exports = component.register('gaia-text-input', {
         transition: transform 200ms;
         transform: scaleX(0);
         visibility: hidden;
-        background: var(--highlight-color, #000);
+        background:
+          var(--fxos-text-input-focus-color,
+          var(--fxos-brand-color, #000));
       }
 
       [type='search'] .focus {
@@ -363,10 +344,6 @@ module.exports = component.register('gaia-text-input', {
         width: calc(100% - 20px);
       }
 
-      /**
-       * .focused
-       */
-
       .focused .focus {
         transform: scaleX(1);
         transition-delay: 200ms;
@@ -374,5 +351,3 @@ module.exports = component.register('gaia-text-input', {
       }
     </style>`
 });
-
-})})(((n,w)=>{return(typeof define)[0]=='f'&&define.amd?define:(typeof module)[0]=='o'?c =>{c(require,exports,module)}:c=>{var m={exports:{}},r=n=>w[n];w[n]=c(r,m.exports,m)||m.exports;};})('gaia-text-input',this));/*jshint ignore:line*/

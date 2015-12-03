@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>&lt;fxos-text-input&gt;</title>
+  <meta name="description" content="fxos-text-input demo">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+  <link rel="stylesheet" href="node_modules/fxos-icons/fxos-icons.css">
+  <link rel="stylesheet" href="node_modules/fxos-theme/fxos-theme.css">
+  <link rel="stylesheet" href="node_modules/fxos-font/fxos-font.css">
+  <script src="node_modules/fxos-theme/lib/fxos-theme-selector.js"></script>
+  <script src="node_modules/fxos-component/fxos-component.js"></script>
+  <script src="fxos-text-input.js"></script>
+  <script src="fxos-text-input-multiline.js"></script>
+  <script src="fxos-text-input-pin.js"></script>
+  <style>
+    html {
+      background: var(--fxos-background);
+      /*color: var(--fxos-color);*/
+      font-family: 'FiraSans';
+    }
+
+    body {
+      padding: 48px 24px 24px;
+    }
+
+  </style>
+</head>
+<body>
+  <fxos-theme-selector></fxos-theme-selector>
+
+  <button id="btn">Focus</button>
+
+  <fxos-text-input id="field" placeholder="Default"></fxos-text-input>
+  <fxos-text-input placeholder="Search" type="search"></fxos-text-input>
+  <fxos-text-input placeholder="Email" type="email" clearable></fxos-text-input>
+  <fxos-text-input-multiline placeholder="Multiline"></fxos-text-input-multiline>
+  <fxos-text-input-pin length="4"></fxos-text-input-pin>
+
+  <fxos-text-input placeholder="Disabled" disabled></fxos-text-input>
+  <fxos-text-input placeholder="Search" type="search" disabled></fxos-text-input>
+  <fxos-text-input placeholder="Email" type="email" clearable disabled></fxos-text-input>
+  <fxos-text-input-multiline placeholder="Multiline" disabled></fxos-text-input-multiline>
+  <fxos-text-input-pin length="4" disabled></fxos-text-input-pin>
+
+  <script>
+    btn.onclick = e => field.focus();
+  </script>
+</body>
+</html>
