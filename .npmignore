@@ -1,5 +1,6 @@
+**/.*
+webpack.config.js
 bower_components
-manifest.webapp
+bower.json
 index.html
-README.md
 test

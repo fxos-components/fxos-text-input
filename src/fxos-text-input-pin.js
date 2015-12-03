@@ -1,11 +1,9 @@
-(define=>{define((require,exports,module)=>{
-'use strict';
 
 /**
  * Dependencies
  */
 
-var component = require('gaia-component');
+var component = require('fxos-component');
 
 /**
  * Locals
@@ -17,7 +15,7 @@ var DEFAULT_LENGTH = 4;
  * Exports
  */
 
-module.exports = component.register('gaia-text-input-pin', {
+module.exports = component.register('fxos-text-input-pin', {
   created() {
     this.setupShadowRoot();
 
@@ -81,8 +79,8 @@ module.exports = component.register('gaia-text-input-pin', {
 
   attrs: {
     length: {
-      get: function() { return this._length; },
-      set: function(value) {
+      get() { return this._length; },
+      set(value) {
         value = Number(value);
         this._length = value;
         this.els.input.setAttribute('maxlength', this.length);
@@ -91,13 +89,13 @@ module.exports = component.register('gaia-text-input-pin', {
     },
 
     value: {
-      get: function() { return this.els.input.value; },
-      set: function(value) { this.els.input.value = value; }
+      get() { return this.els.input.value; },
+      set(value) { this.els.input.value = value; }
     },
 
     disabled: {
-      get: function() { return this.els.input.disabled; },
-      set: function(value) {
+      get() { return this.els.input.disabled; },
+      set(value) {
         value = !!(value === '' || value);
         this.els.input.disabled = value;
       }
@@ -112,11 +110,7 @@ module.exports = component.register('gaia-text-input-pin', {
         <div class="fields"></div>
       </div>
     </div>
-
     <style>
-
-    /** Host
-     ---------------------------------------------------------*/
 
     :host {
       display: block;
@@ -126,15 +120,9 @@ module.exports = component.register('gaia-text-input-pin', {
       font-size: 40px;
     }
 
-    /** Inner
-     ---------------------------------------------------------*/
-
     .inner {
       height: 100%;
     }
-
-    /** Label
-     ---------------------------------------------------------*/
 
     label {
       font-size: 14px;
@@ -142,17 +130,11 @@ module.exports = component.register('gaia-text-input-pin', {
       margin: 0 0 4px 16px;
     }
 
-    /** Container
-     ---------------------------------------------------------*/
-
     .container {
       position: relative;
       z-index: 0;
       height: 100%;
     }
-
-    /** Input (hidden)
-     ---------------------------------------------------------*/
 
     input {
       opacity: 0;
@@ -166,9 +148,6 @@ module.exports = component.register('gaia-text-input-pin', {
       z-index: 1;
     }
 
-    /** Fields
-     ---------------------------------------------------------*/
-
     .fields {
       display: flex;
       position: relative;
@@ -176,16 +155,9 @@ module.exports = component.register('gaia-text-input-pin', {
       margin-left: -1rem;
     }
 
-    /**
-     * [disbled]
-     */
-
     [disabled] + .fields {
       pointer-events: none;
     }
-
-    /** Cell
-     ---------------------------------------------------------*/
 
     .cell {
       position: relative;
@@ -216,16 +188,9 @@ module.exports = component.register('gaia-text-input-pin', {
         #fff)));
     }
 
-    /**
-     * [disbled]
-     */
-
     [disabled] + .fields .cell {
       background: none;
     }
-
-    /** Dot
-     ---------------------------------------------------------*/
 
     .cell::after {
       content: '';
@@ -244,10 +209,6 @@ module.exports = component.register('gaia-text-input-pin', {
         var(--text-color);
     }
 
-    /**
-     * .populated
-     */
-
     .cell.populated::after {
       opacity: 1;
     }
@@ -263,16 +224,6 @@ module.exports = component.register('gaia-text-input-pin', {
       background: var(--highlight-color, #000);
     }
 
-    /**
-     * input:focus
-     */
-
-    input:focus + .fields .cell::before {
-      visibility: visible;
-    }
-
-    </style>
-  `
+    input:focus + .fields .cell::before { visibility: visible; }
+  </style>`
 });
-
-})})(((n,w)=>{return(typeof define)[0]=='f'&&define.amd?define:(typeof module)[0]=='o'?c =>{c(require,exports,module)}:c=>{var m={exports:{}},r=n=>w[n];w[n]=c(r,m.exports,m)||m.exports;};})('gaia-text-input-pin',this));/*jshint ignore:line*/

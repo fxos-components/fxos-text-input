@@ -1,25 +1,23 @@
-(define=>{define((require,exports,module)=>{
-'use strict';
 
 /**
  * Dependencies
  */
 
-var component = require('gaia-component');
-require('gaia-icons'); // Load gaia-icons
+var component = require('fxos-component');
+require('fxos-icons');
 
 /**
  * Mini logger
  *
  * @type {Function}
  */
-var debug = 0 ? (...args) => console.log('[GaiaTextInput]', ...args) : () => {};
+var debug = 0 ? (...args) => console.log('[fxos-text-input]', ...args) : () => {};
 
 /**
  * Exports
  */
 
-module.exports = component.register('gaia-text-input', {
+module.exports = component.register('fxos-text-input', {
   created() {
     this.setupShadowRoot();
 
@@ -327,7 +325,7 @@ module.exports = component.register('gaia-text-input', {
         content: 'close';
         display: block;
 
-        font: normal 500 19px/17px 'gaia-icons';
+        font: normal 500 19px/17px 'fxos-icons';
         text-rendering: optimizeLegibility;
       }
 
@@ -362,5 +360,3 @@ module.exports = component.register('gaia-text-input', {
       }
     </style>`
 });
-
-})})(((n,w)=>{return(typeof define)[0]=='f'&&define.amd?define:(typeof module)[0]=='o'?c =>{c(require,exports,module)}:c=>{var m={exports:{}},r=n=>w[n];w[n]=c(r,m.exports,m)||m.exports;};})('gaia-text-input',this));/*jshint ignore:line*/
