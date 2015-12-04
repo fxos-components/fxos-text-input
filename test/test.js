@@ -1,13 +1,8 @@
 /*global assert,suite,setup,teardown,sinon,test*/
 /*jshint maxlen:false*/
 
-suite('GaiaInput', function() {
+suite('fxos-text-input', function() {
   'use strict';
-
-  /**
-   * Dependencies
-   */
-
   var dom;
 
   setup(function() {
@@ -90,7 +85,7 @@ suite('GaiaInput', function() {
 
   function create(attrs) {
     var div = document.createElement('div');
-    div.innerHTML = `<gaia-text-input ${attrs}></gaia-text-input>`;
+    div.innerHTML = `<fxos-text-input ${attrs}></fxos-text-input>`;
     var result = div.firstElementChild;
     dom.appendChild(result);
     return result;

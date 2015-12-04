@@ -13,12 +13,12 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'bower_components/gaia-component/gaia-component.js',
-      'bower_components/gaia-icons/gaia-icons.css',
-      'bower_components/gaia-theme/gaia-theme.css',
-      { pattern: 'bower_components/gaia-icons/fonts/*', included: false },
-      'gaia-text-input.js',
-      'test/gaia-text-input.js'
+      'node_modules/fxos-component/fxos-component.js',
+      'node_modules/fxos-icons/fxos-icons.css',
+      'node_modules/fxos-theme/fxos-theme.css',
+      { pattern: 'node_modules/fxos-icons/fonts/*', included: false },
+      'fxos-text-input.js',
+      'test/test.js'
     ],
 
     // test results reporter to use

@@ -1,11 +1,11 @@
-# &lt;gaia-text-input&gt; [![](https://travis-ci.org/fxos-components/gaia-text-input.svg)](https://travis-ci.org/fxos-components/gaia-text-input)
+# &lt;fxos-text-input&gt; [![](https://travis-ci.org/fxos-components/fxos-text-input.svg)](https://travis-ci.org/fxos-components/fxos-text-input)
 
 ## Installation
 
 ```bash
-$ bower install fxos-components/gaia-text-input
+$ npm install fxos-text-input
 ```
 
 ## Examples
 
-- [Example](http://fxos-components.github.io/gaia-text-input/)
+- [Example](http://fxos-components.github.io/fxos-text-input/)
