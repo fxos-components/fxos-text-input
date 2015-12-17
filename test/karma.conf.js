@@ -18,7 +18,8 @@ module.exports = function(config) {
       'node_modules/fxos-theme/fxos-theme.css',
       { pattern: 'node_modules/fxos-icons/fonts/*', included: false },
       'fxos-text-input.js',
-      'test/test.js'
+      'fxos-text-input-pin.js',
+      'test/*_test.js'
     ],
 
     // test results reporter to use

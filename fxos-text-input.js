@@ -67,7 +67,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @type {Function}
 	 */
-	var debug = 0 ? (...args) => console.log('[fxos-text-input]', ...args) : () => {};
+	var debug = 0
+	  ? (...args) => console.log('[fxos-text-input]', ...args)
+	  : () => {};
 
 	/**
 	 * Exports
