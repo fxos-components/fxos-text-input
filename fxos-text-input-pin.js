@@ -66,6 +66,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 
 	var DEFAULT_LENGTH = 4;
+	var DEFAULT_MAXLENGTH = 8;
 
 	/**
 	 * Exports
@@ -83,16 +84,36 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    this.disabled = this.hasAttribute('disabled');
 	    this.length = this.getAttribute('length') || DEFAULT_LENGTH;
+	    this.maxlength = this.getAttribute('maxlength') || DEFAULT_MAXLENGTH;
 
 	    this.addEventListener('keyup', () => this.updateCells());
 	  },
 
 	  updateCells() {
 	    var l = this.els.input.value.length;
+	    var cellsLength = this.els.cells.length;
+	    if (l > cellsLength && l <= this.maxlength) {
+	      this.addCell();
+	    } else if (l < cellsLength && l >= this.length) {
+	      this.removeCell();
+	    }
+
 	    this.els.cells.forEach((cell, i) => {
 	      cell.classList.toggle('populated', i < l);
 	      cell.classList.toggle('focused', i == l);
 	    });
+	  },
+
+	  addCell() {
+	    var el = document.createElement('div');
+	    el.className = 'cell';
+	    this.els.fields.appendChild(el);
+	    this.els.cells.push(el);
+	  },
+
+	  removeCell() {
+	    var lastCell = this.els.cells.pop();
+	    this.els.fields.removeChild(lastCell);
 	  },
 
 	  onBackspace(e) {
@@ -113,15 +134,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.els.cells = [];
 
 	    for (var i = 0, l = this.length; i < l; i++) {
-	      var el = document.createElement('div');
-	      el.className = 'cell';
-	      this.els.fields.appendChild(el);
-	      this.els.cells.push(el);
+	      this.addCell();
 	    }
 	  },
 
 	  clear(e) {
 	    this.value = '';
+	    while (this.els.cells.length > this.length) {
+	      this.removeCell();
+	    }
 	    this.updateCells();
 	  },
 
@@ -139,8 +160,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      set(value) {
 	        value = Number(value);
 	        this._length = value;
-	        this.els.input.setAttribute('maxlength', this.length);
 	        this.setupFields();
+	      }
+	    },
+
+	    maxlength: {
+	      get() { return this._maxlength; },
+	      set(value) {
+	        value = Number(value);
+	        this._maxlength = value;
+	        this.els.input.setAttribute('maxlength', this.maxlength);
 	      }
 	    },
 
