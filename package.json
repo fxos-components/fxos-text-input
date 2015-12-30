@@ -12,7 +12,6 @@
     "fxos-icons": "^2.0.0"
   },
   "devDependencies": {
-    "bower": "^1.6.5",
     "fxos-font": "^1.0.0",
     "fxos-theme": "^2.0.0",
     "jshint": "^2.8.0",
@@ -25,7 +24,7 @@
     "webpack": "^1.12.9"
   },
   "scripts": {
-    "start": "npm run -s watch & nws -d examples/text-cases/ -p 8005 -o",
+    "start": "npm run -s watch & nws -d examples/demo/ -p 8005 -o",
     "test": "npm run --silent test-unit && npm run --silent test-lint",
     "test-lint": "jshint src/*.js",
     "test-unit": "karma start test/karma.conf.js --single-run",
