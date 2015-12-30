@@ -91,6 +91,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.clearable = this.hasAttribute('clearable');
 	    this.placeholder = this.getAttribute('placeholder');
 	    this.required = this.getAttribute('required');
+	    this.maxlength = this.getAttribute('maxlength');
 	    this.value = this.getAttribute('value');
 
 	    // Don't take focus from the input field
