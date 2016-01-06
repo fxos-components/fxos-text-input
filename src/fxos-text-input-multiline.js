@@ -27,6 +27,7 @@ module.exports = component.register('fxos-text-input-multiline', {
 
   clear(e) {
     this.value = '';
+    this.focus();
   },
 
   attrs: {

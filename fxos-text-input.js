@@ -99,8 +99,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    this.els.clear.addEventListener('click', e => this.clear(e));
 	    this.els.input.addEventListener('input', e => this.onInput(e));
-	    this.els.input.addEventListener('focus', e => this.onFocus(e));
-	    this.els.input.addEventListener('blur', e => this.onBlur(e));
+
+	    // Use capturing to handle focus and blur of fxos-text-input elements to
+	    // make sure that it is keyboard accessible.
+	    this.els.inner.addEventListener('focus', e => this.onFocus(e), true);
+	    this.els.inner.addEventListener('blur', e => this.onBlur(e), true);
+	  },
+
+	  attached: function() {
+	    this.setupShadowL10n();
 	  },
 
 	  /**
@@ -111,6 +118,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  clear() {
 	    debug('clear');
 	    this.value = '';
+	    // Focus back on the input.
+	    this.focus();
 	    this.emit('clear');
 	  },
 
@@ -139,8 +148,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @private
 	   */
-	  onFocus() {
+	  onFocus(e) {
 	    debug('on focus');
+	    // If there is a preceding blur event, it needs to be cancelled because user
+	    // focus is still inside fxos-input.
+	    if (this.onBlurTimeout) {
+	      clearTimeout(this.onBlurTimeout);
+	      this.onBlurTimeout = null;
+	    }
+
 	    this.els.inner.classList.add('focused');
 	    this.emit('focus');
 	  },
@@ -150,10 +166,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @private
 	   */
-	  onBlur() {
+	  onBlur(e) {
 	    debug('on blur');
-	    this.els.inner.classList.remove('focused');
-	    this.emit('blur');
+	    // Delay blur just enough to check if the focus is still on one of
+	    // fxos-text-input's elements.
+	    this.onBlurTimeout = setTimeout(() => {
+	      this.onBlurTimeout = null;
+	      this.els.inner.classList.remove('focused');
+	      this.emit('blur');
+	    }, 75);
 	  },
 
 	  /**
@@ -271,7 +292,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      <content select="label"></content>
 	      <div class="fields">
 	        <input type="text"/>
-	        <button class="clear" tabindex="-1"></button>
+	        <button class="clear" data-l10n-id="FXOSTextInputClear"></button>
 	        <div class="focus"></div>
 	      </div>
 	    </div>
@@ -358,6 +379,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        pointer-events: none;
 	        cursor: pointer;
 	        opacity: 0;
+	        visibility: hidden;
+	        transition: visibility 0s 200ms, opacity 200ms;
 
 	        color: var(--fxos-text-input-clear-color, #fff);
 	        background-color: var(--fxos-text-input-clear-background, #999);
@@ -367,8 +390,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      [clearable].has-value.focused .clear {
 	        pointer-events: all;
-	        transition: opacity 200ms;
+	        transition-delay: 0s;
 	        opacity: 1;
+	        visibility: visible;
 	      }
 
 	      .clear:before {

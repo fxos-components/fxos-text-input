@@ -83,6 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  clear(e) {
 	    this.value = '';
+	    this.focus();
 	  },
 
 	  attrs: {
