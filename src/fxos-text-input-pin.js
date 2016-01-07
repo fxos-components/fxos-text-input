@@ -135,8 +135,8 @@ module.exports = component.register('fxos-text-input-pin', {
     <div class="inner">
       <content select="label"></content>
       <div class="container">
-        <input x-inputmode="digit"/>
-        <div class="fields"></div>
+        <input type="password" inputmode="digit"/>
+        <div class="fields" aria-hidden="true"></div>
       </div>
     </div>
     <style>

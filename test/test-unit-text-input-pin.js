@@ -4,6 +4,7 @@
 suite('fxos-text-input-pin', function() {
   'use strict';
   var dom;
+  var accessibility = window['test-utils'].accessibility;
 
   setup(function() {
     this.sinon = sinon.sandbox.create();
@@ -41,7 +42,6 @@ suite('fxos-text-input-pin', function() {
     test('it does not add new cells when > maxlength', function() {
       var el = create('length="4" maxlength="5"');
       sendDigits(el, 6);
-      console.log(el.els.cells.length);
       assert(el.els.cells.length === 5);
     });
 
@@ -70,6 +70,37 @@ suite('fxos-text-input-pin', function() {
       assert(el.value === '');
       assert(el.els.cells.length === 4);
     });
+  });
+
+  suite('accessibility', function() {
+    /**
+     * Accessibility test utils module tests the following things, amongst other
+     * checks (all at once).:
+     *  - ARIA attributes specific checks
+     *  - accesskey uniqueness if applicable
+     *  - Presence of alternative descriptions, labels and names
+     *  - Color contrast
+     *  - Markup is semantically correct from a11y standpoint
+     *  - Heading order
+     *  - Frame/document title and language
+     *  - Landmarks if applicable
+     *  - Keyboard focusability and tabindex
+     *
+     * Its checks are called at different stages and within different states of
+     * the component.
+     */
+
+    var el;
+
+    setup(function() {
+      el = create('length="4" maxlength="8"');
+    });
+
+    test('fxos-text-input-pin default states pass all accessibility checks ' +
+      'above and have attributes correctly set',
+      function(done) {
+        accessibility.check(dom).then(done, done);
+      });
   });
 
   /**

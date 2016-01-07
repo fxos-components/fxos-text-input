@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>fxos-text-input</title>
+  <meta name="description" content="Integration tests for fxos-text-input" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="../node_modules/fxos-theme/fxos-theme.css">
+  <link rel="stylesheet" href="../node_modules/fxos-font/fxos-font.css">
+  <link rel="stylesheet" href="../node_modules/fxos-icons/fxos-icons.css">
+  <script src="../node_modules/fxos-component/fxos-component.js"></script>
+  <script src="../fxos-text-input.js"></script>
+  <script src="../fxos-text-input-multiline.js"></script>
+  <script src="../fxos-text-input-pin.js"></script>
+  <style>
+    html {
+      background: var(--fxos-background);
+      color: var(--fxos-color);
+      font-family: 'FiraSans';
+    }
+
+    body {
+      padding: 48px 24px 24px;
+    }
+  </style>
+</head>
+<body role="application">
+  <fxos-text-input id="fxi1" placeholder="Default"></fxos-text-input>
+  <fxos-text-input id="fxi2" placeholder="Search" type="search"></fxos-text-input>
+  <fxos-text-input id="fxi3" placeholder="Email" type="email" clearable></fxos-text-input>
+  <fxos-text-input-multiline id="fxi4" placeholder="Multiline"></fxos-text-input-multiline>
+  <fxos-text-input-pin id="fxi5" length="4"></fxos-text-input-pin>
+  <fxos-text-input id="fxi6" placeholder="Disabled" disabled></fxos-text-input>
+</body>
+</html>
