@@ -1,6 +1,6 @@
 {
   "name": "fxos-text-input",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "https://github.com/fxos-components/fxos-text-input",
   "license": "ISC",
   "main": "fxos-text-input.js",
