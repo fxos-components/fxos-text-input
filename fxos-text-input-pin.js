@@ -191,7 +191,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    <div class="inner">
 	      <content select="label"></content>
 	      <div class="container">
-	        <input type="password" inputmode="digit"/>
+	        <input type="password" x-inputmode="digit"/>
 	        <div class="fields" aria-hidden="true"></div>
 	      </div>
 	    </div>
